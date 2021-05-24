@@ -11,7 +11,6 @@ import {
 } from '../../Components';
 import { useForm, Controller } from "react-hook-form";
 import emojiRegex from 'emoji-regex/RGI_Emoji.js';
-import { BlurView, VibrancyView } from "@react-native-community/blur"
 import { WhereOptions, FamilyInfo } from '../../Constants/srcData';
 import styles from './styles';
 import { getTimeSlots } from '../../Utils';
@@ -37,9 +36,7 @@ const Home = () => {
         setTimeSlots(getTimeSlots())
     }, [])
     return (
-        <View style={{
-            backgroundColor: '#FDF4EA',
-        }}>
+        <View style={styles.mainContainer}>
             <Container
                 style={[styles.containerStyle, { marginBottom: !isModalOpen ? 30 : 0 }]}
                 scrollEnabled={isFieldsDisabled}
