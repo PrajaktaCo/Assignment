@@ -1,5 +1,4 @@
-import { StyleSheet} from 'react-native';
-
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     everyoneButton: {
@@ -18,15 +17,15 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         marginBottom: 10,
     },
-    innerLabelContainer: { 
-        flexDirection: 'row' 
+    innerLabelContainer: {
+        flexDirection: 'row'
     },
     arrowStyle: {
         left: 25
     },
-    checkButton: { 
-        position: 'absolute', 
-        right: 8 
+    checkButton: {
+        position: 'absolute',
+        right: 8
     }
 })
 

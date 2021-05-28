@@ -10,7 +10,7 @@ const HorizontalList = ({
     value
 }) => {
     const onSelectCard = (id) => onChange(`${id}`)
-    
+
     const getItemColor = (isSelected) => isSelected ? '#FFFFFF' : COLORS.TEXT_COLOR;
 
     return (

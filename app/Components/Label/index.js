@@ -6,7 +6,7 @@ const Label = ({
     title,
 }) => {
     return (
-            <Text style={styles.textStyle}>{title}</Text>
+        <Text style={styles.textStyle}>{title}</Text>
     )
 }
 

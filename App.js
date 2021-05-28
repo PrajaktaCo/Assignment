@@ -7,12 +7,12 @@
  */
 
 import React from 'react';
-import {Home} from './app/Views';
+import { Home } from './app/Views';
 
 const App = () => {
 
   return (
-      <Home />
+    <Home />
   );
 };
 

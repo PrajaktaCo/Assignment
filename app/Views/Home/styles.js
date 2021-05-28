@@ -1,14 +1,15 @@
 import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    mainContainer : {
+    mainContainer: {
         backgroundColor: '#FDF4EA',
+        flex: 1
     },
     containerStyle: {
-        marginTop: 20,
+        marginTop: '10%',
     },
-    dividerStyle: { 
-        marginVertical: 10, 
+    dividerStyle: {
+        marginVertical: 10,
     },
     txtInput: {
         height: 50,
@@ -21,7 +22,17 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 15,
         backgroundColor: '#FFFFFF',
         color: '#A99680',
-        justifyContent: 'center'
+        paddingTop: 10
+    },
+    txtInputOverlay: {
+        marginHorizontal: 10,
+        marginTop: 10,
+        paddingLeft: 20,
+        borderTopRightRadius: 15,
+        borderTopLeftRadius: 15,
+        backgroundColor: '#FFFFFF',
+        paddingTop: 10,
+        opacity: 1
     },
     addTxtInput: {
         fontSize: 20,
@@ -33,7 +44,17 @@ const styles = StyleSheet.create({
         borderBottomLeftRadius: 15,
         backgroundColor: '#FFFFFF',
         color: '#A99680',
-        justifyContent: 'center'
+        paddingTop: 10
+    },
+    addInputOverlay: {
+        marginHorizontal: 10,
+        marginTop: 1,
+        padding: 20,
+        borderBottomRightRadius: 15,
+        borderBottomLeftRadius: 15,
+        backgroundColor: '#FFFFFF',
+        paddingTop: 10,
+        opacity: 1
     },
     labelContainer: {
         flexDirection: 'row',
@@ -43,7 +64,7 @@ const styles = StyleSheet.create({
         marginHorizontal: 10
     },
     arrowStyle: {
-        marginRight:7
+        marginRight: 7
     },
     everyoneButton: {
         borderRadius: 6,

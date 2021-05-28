@@ -2,9 +2,9 @@ import React from 'react'
 import { View } from 'react-native';
 import styles from './styles';
 
-const Overlay = ({ children }) => {
+const Overlay = ({ children, style }) => {
     return (
-        <View style={styles.containerStyle}>
+        <View style={[styles.containerStyle, style]}>
             {children}
         </View>
     )

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { View, TextInput } from 'react-native';
 import {
     Container,
@@ -18,19 +18,23 @@ import { getTimeSlots } from '../../Utils';
 const emoRegex = emojiRegex();
 
 const whereValidator = (value) => {
-    const emojiRegex = value.match(emoRegex)
-    return value.split(' ').length <= 6 || emojiRegex.length <= 6;
+    const emojiRegex = value.match(emoRegex);
+    return value.split(' ').length <= 6 || emojiRegex?.length <= 6;
 };
 
 const addInfoValidator = (value) => value.split(' ').length <= 50;
 
 const Home = () => {
-    const { control, formState, errors, reset, watch } = useForm({ mode: "onChange" });
+    const { control, formState: { errors }, reset, watch } = useForm({ mode: "onChange" });
     const [isModalOpen, setModalOpen] = useState(false);
     const [timeSlots, setTimeSlots] = useState([]);
+    const inputRef = useRef(null)
     const where = watch('where');
     const when = watch('when');
+    const where_will_you_be = watch('where_will_you_be');
+    const friends_list = watch('friends_list');
     const isFieldsDisabled = where && when;
+    const isAllFieldsDisabled = where && when && where_will_you_be && friends_list.length;
 
     useEffect(() => {
         setTimeSlots(getTimeSlots())
@@ -39,7 +43,7 @@ const Home = () => {
         <View style={styles.mainContainer}>
             <Container
                 style={[styles.containerStyle, { marginBottom: !isModalOpen ? 30 : 0 }]}
-                scrollEnabled={isFieldsDisabled}
+                scrollEnabled={true}
             >
                 <Label title={'Where'} />
                 <Controller
@@ -78,14 +82,23 @@ const Home = () => {
                 <Controller
                     control={control}
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                            style={styles.txtInput}
-                            placeholder={isFieldsDisabled && "Where will you be?"}
-                            placeholderTextColor={'#A99680'}
-                            onBlur={onBlur}
-                            onChangeText={value => onChange(value)}
-                            value={value}
-                        />
+                        <View>
+                            <TextInput
+                                ref={inputRef}
+                                style={styles.txtInput}
+                                placeholder={"Where will you be?"}
+                                placeholderTextColor={'#A99680'}
+                                onBlur={onBlur}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+                                multiline={true}
+                            />
+                            {
+                                isFieldsDisabled ?
+                                    null : <Overlay style={styles.txtInputOverlay} />
+                            }
+                        </View>
+
                     )}
                     name="where_will_you_be"
                     rules={{ required: true, validate: whereValidator }}
@@ -94,30 +107,45 @@ const Home = () => {
                 <Controller
                     control={control}
                     render={({ field: { onChange, onBlur, value } }) => (
-                        <TextInput
-                            style={styles.addTxtInput}
-                            placeholder={isFieldsDisabled && "Add more info about your plans or ask for suggestions! (optional)"}
-                            placeholderTextColor={'#A99680'}
-                            onBlur={onBlur}
-                            onChangeText={value => onChange(value)}
-                            value={value}
-                        />
+                        <View>
+                            <TextInput
+                                ref={inputRef}
+                                style={styles.addTxtInput}
+                                placeholder={"Add more info about your plans or ask for suggestions! (optional)"}
+                                placeholderTextColor={'#A99680'}
+                                onBlur={onBlur}
+                                onChangeText={value => onChange(value)}
+                                value={value}
+                                multiline={true}
+                            />
+                            {
+                                isFieldsDisabled ?
+                                    null : <Overlay style={styles.addInputOverlay} />
+                            }
+                        </View>
+
                     )}
                     name="add_more_info"
                     defaultValue=""
-                    rules={{ required: true, validate: addInfoValidator }}
+                    rules={{ validate: addInfoValidator }}
                 />
                 <Divider style={styles.dividerStyle} />
                 <Controller
                     control={control}
-                    render={({ field: { onChange, onBlur, value, name } }) => (
-                        <FriendsList
-                            familyInfo={FamilyInfo}
-                            isModalOpen={isModalOpen}
-                            setModalOpen={setModalOpen}
-                            selectedList={value}
-                            onChange={onChange}
-                        />
+                    render={({ field: { onChange, value } }) => (
+                        <View>
+                            <FriendsList
+                                familyInfo={FamilyInfo}
+                                isModalOpen={isModalOpen}
+                                setModalOpen={setModalOpen}
+                                selectedList={value}
+                                onChange={onChange}
+                            />
+                            {
+                                isFieldsDisabled ?
+                                    null : <Overlay />
+                            }
+                        </View>
                     )}
                     name="friends_list"
                     rules={{ required: true }}
@@ -128,8 +156,9 @@ const Home = () => {
                 title={'Save'}
                 titleStyle={styles.saveButtonTxt}
                 style={styles.saveButton}
-                disabled={!formState.isValid}
+                disabled={!isAllFieldsDisabled}
                 onPress={() => {
+                    inputRef.current.blur();
                     reset({
                         where: null,
                         when: null,
@@ -144,10 +173,6 @@ const Home = () => {
                     });
                 }}
             />
-            {
-                isFieldsDisabled ?
-                    null : <Overlay />
-            }
 
         </View>
     )

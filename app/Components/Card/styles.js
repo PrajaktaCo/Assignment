@@ -7,8 +7,8 @@ const styles = StyleSheet.create({
         height: 90,
         width: 162,
         justifyContent: 'center',
-        margin:10,
-        paddingLeft:20
+        margin: 10,
+        paddingLeft: 20
     },
     cardLabel: {
         fontWeight: '600',

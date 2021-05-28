@@ -4,7 +4,7 @@ const screenHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
     wrapper: {
-        height:screenHeight
+        height: screenHeight
     }
 })
 

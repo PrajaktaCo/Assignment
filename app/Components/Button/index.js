@@ -12,7 +12,7 @@ const Button = ({
 }) => {
     return (
         <TouchableOpacity
-            style={[styles.buttonStyle, style, { backgroundColor: disabled ? COLORS.DISABLE : COLORS.PRIMARY_COLOR }]}
+            style={[styles.buttonStyle, style, { backgroundColor: disabled ? '#F2B875' : COLORS.PRIMARY_COLOR }]}
             onPress={onPress}
             disabled={disabled}
         >
